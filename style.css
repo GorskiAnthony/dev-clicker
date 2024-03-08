@@ -4,10 +4,21 @@
   --tertiary-color: 242, 182, 74; /** #f2b64a */
 }
 
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/montserra.ttf");
+}
+
+@font-face {
+  font-family: "Digital";
+  src: url("./assets/fonts/digit.ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
 header {
