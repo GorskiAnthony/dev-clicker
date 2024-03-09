@@ -5,10 +5,12 @@
  * @param description : string
  * @param img : string
  * @param buy : number
+ * @param id : number
+ * @param isBuy : string
  * @returns {string}
  */
-function createCard(title, price, description, img, buy) {
-  return `<div class="shop-item">
+function createCard(title, price, description, img, buy, id, isBuy) {
+  return `<div class="shop-item ${isBuy}" data-shop="${img}" data-id="${id}" >
     <img src="./assets/shop/${img}.png" alt="bug" />
     <div class="shop-info">
       <div>
@@ -53,4 +55,23 @@ function bug() {
 
   // return the img
   return img;
+}
+
+function buyShop(shop, counter) {
+  // buy the item
+  const newPrice = countClick - shop.price;
+  // if the user has enough bugs
+  if (newPrice >= 0) {
+    // update the countClick
+    countClick = newPrice;
+    // update the localStorage
+    localStorage.setItem("countClick", counter);
+    // update the bugCount
+    bugCount.textContent = counter;
+  }
+
+  shop.buy++;
+  // update the shopItems
+  return shop;
+  // update the localStorage
 }

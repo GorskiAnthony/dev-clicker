@@ -143,6 +143,17 @@ main {
   gap: 20px;
 }
 
+.shop-item::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 100;
+}
+
 .shop-item {
   cursor: pointer;
   position: relative;
@@ -152,6 +163,11 @@ main {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.no-buy {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .shop-item img {

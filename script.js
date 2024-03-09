@@ -4,6 +4,12 @@ const imgDev = document.querySelector(".img-dev");
 const bugCount = document.querySelector(".bug-count");
 const containerImg = document.querySelector(".container-img");
 let shopItems = document.querySelector(".shop-items");
+const deleteAccount = document.getElementById("deleteAccount");
+
+deleteAccount.addEventListener("click", () => {
+  localStorage.clear();
+  location.reload();
+});
 
 // Get the countClick from the localStorage
 let countClick = localStorage.getItem("countClick") || 0;
@@ -11,8 +17,9 @@ let countClick = localStorage.getItem("countClick") || 0;
 bugCount.textContent = countClick;
 
 // Create the shop items
-const shops = [
+const dataShop = [
   {
+    id: 1,
     title: "Congrats",
     price: "10",
     description: "Congrats is the key to success",
@@ -20,6 +27,7 @@ const shops = [
     buy: 0,
   },
   {
+    id: 2,
     title: "Coffee",
     price: "20",
     description: "Coffee is the key to success",
@@ -27,6 +35,7 @@ const shops = [
     buy: 0,
   },
   {
+    id: 3,
     title: "Automatisation",
     price: "50",
     description: "Automatisation is the key to success",
@@ -34,6 +43,7 @@ const shops = [
     buy: 0,
   },
   {
+    id: 4,
     title: "Coffee premium",
     price: "70",
     description: "Coffee is the key to success (but premium)",
@@ -41,6 +51,7 @@ const shops = [
     buy: 0,
   },
   {
+    id: 5,
     title: "Time",
     price: "150",
     description: "Time is the key to success",
@@ -48,6 +59,8 @@ const shops = [
     buy: 0,
   },
 ];
+
+const shops = JSON.parse(localStorage.getItem("shop")) || dataShop;
 
 /**
  * Logic for the dev and the bug
@@ -76,6 +89,21 @@ imgDev.addEventListener("click", () => {
   localStorage.setItem("countClick", countClick);
   // Update the bugCount
   bugCount.textContent = countClick;
+
+  // check is possible to buy the items
+  shopItems.innerHTML = shops
+    .map((shop) => {
+      return createCard(
+        shop.title,
+        shop.price,
+        shop.description,
+        shop.img,
+        shop.buy,
+        shop.id,
+        countClick >= shop.price ? "buy" : "no-buy",
+      );
+    })
+    .join("");
 });
 
 // Toggle the active class on the nav-links
@@ -95,7 +123,8 @@ links.forEach((link) => {
 });
 
 // Create the shop items
-let html = shops
+
+shopItems.innerHTML = shops
   .map((shop) => {
     return createCard(
       shop.title,
@@ -103,8 +132,42 @@ let html = shops
       shop.description,
       shop.img,
       shop.buy,
+      shop.id,
+      countClick >= shop.price ? "" : "no-buy",
     );
   })
   .join("");
 
-shopItems.innerHTML = html;
+// Add the event listener on item in the shop items
+shopItems.addEventListener("click", (e) => {
+  if (!e.target.dataset.shop) return;
+
+  // buy the item
+  const shopSelected = shops.find((shop) => shop.id === +e.target.dataset.id);
+
+  shopItems.innerHTML = shops
+    .map((shop) => {
+      if (shop.id === shopSelected.id) {
+        if (countClick >= shop.price) {
+          countClick -= shop.price;
+          localStorage.setItem("countClick", countClick);
+          bugCount.textContent = countClick;
+          shop.buy++;
+          shop.price = Math.floor(shop.price * 1.2);
+          localStorage.setItem("shop", JSON.stringify(shops));
+        } else {
+          console.warn("You don't have enough bugs");
+        }
+      }
+      return createCard(
+        shop.title,
+        shop.price,
+        shop.description,
+        shop.img,
+        shop.buy,
+        shop.id,
+        countClick >= shop.price ? "buy" : "no-buy",
+      );
+    })
+    .join("");
+});
