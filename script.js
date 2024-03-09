@@ -3,8 +3,8 @@ const navLinks = document.querySelector(".nav-links");
 const imgDev = document.querySelector(".img-dev");
 const bugCount = document.querySelector(".bug-count");
 const containerImg = document.querySelector(".container-img");
-let shopItems = document.querySelector(".shop-items");
 const deleteAccount = document.getElementById("deleteAccount");
+let shopItems = document.querySelector(".shop-items");
 
 deleteAccount.addEventListener("click", () => {
   localStorage.clear();
@@ -22,7 +22,7 @@ const dataShop = [
     id: 1,
     title: "Congrats",
     price: "10",
-    description: "Congrats is the key to success",
+    description: "Kill one bug every 10s",
     img: "congrat",
     buy: 0,
   },
@@ -84,6 +84,7 @@ imgDev.addEventListener("click", () => {
   }, 1000);
 
   // Increment the countClick
+  countClick = localStorage.getItem("countClick");
   countClick++;
   // Update the localStorage
   localStorage.setItem("countClick", countClick);
@@ -171,3 +172,13 @@ shopItems.addEventListener("click", (e) => {
     })
     .join("");
 });
+
+// run shop !
+// congrat
+
+if (shops[0].buy > 0) {
+  setInterval(() => {
+    const countBugs = localStorage.getItem("countClick");
+    bugCount.textContent = congrat(shops[0].buy, countBugs);
+  }, 10000);
+}

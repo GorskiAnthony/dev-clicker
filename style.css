@@ -222,6 +222,11 @@ main {
   height: auto !important;
 }
 
+#deleteAccount {
+  color: red;
+  font-weight: bold;
+}
+
 /** Media Queries */
 
 @media screen and (max-width: 768px) {
