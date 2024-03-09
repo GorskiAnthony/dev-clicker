@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Dev clicker</title>
+    <script src="services.js" defer></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -26,18 +28,19 @@
     </header>
     <main>
       <section class="game">
-        <h1>48<span>Bug killed</span></h1>
-        <img
-          src="./assets/dev.png"
-          alt="un développeur devant son ordinateur"
-        />
+        <h1><span class="bug-count"></span><span>Bug killed</span></h1>
+        <div class="container-img">
+          <img
+            class="img-dev"
+            src="./assets/dev.png"
+            alt="un développeur devant son ordinateur"
+          />
+        </div>
       </section>
       <section class="shop">
         <h2>Shop</h2>
         <div class="shop-items"></div>
       </section>
     </main>
-    <script src="template.js"></script>
-    <script src="script.js"></script>
   </body>
 </html>

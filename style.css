@@ -102,19 +102,22 @@ header {
   padding-top: 3rem;
 }
 
-.game > h1 {
-  font-family: "Digital", sans-serif;
-  font-size: 10rem;
-}
-
 .game span {
   font-family: "Digital", sans-serif;
   font-size: 2rem;
   display: block;
 }
 
-.game img {
-  width: 45%;
+.bug-count {
+  font-family: "Digital", sans-serif;
+  font-size: 8vw !important;
+}
+
+.container-img {
+  position: relative;
+}
+
+.container-img > img {
   height: auto;
   padding-right: 1.5rem;
 }
@@ -193,6 +196,14 @@ main {
 .bold {
   font-weight: bold;
   padding-right: 5px;
+}
+
+/** bug section */
+
+.bug {
+  position: absolute !important;
+  width: 5rem !important;
+  height: auto !important;
 }
 
 /** Media Queries */
