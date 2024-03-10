@@ -57,21 +57,24 @@ function bug() {
   return img;
 }
 
-function buyShop(shop, counter) {
-  // buy the item
-  const newPrice = countClick - shop.price;
-  // if the user has enough bugs
-  if (newPrice >= 0) {
-    // update the countClick
-    countClick = newPrice;
-    // update the localStorage
-    localStorage.setItem("countClick", counter);
-    // update the bugCount
-    bugCount.textContent = counter;
-  }
-
-  shop.buy++;
-  // update the shopItems
-  return shop;
-  // update the localStorage
+/**
+ * Create the shop items
+ * @param makeShop : object
+ * @param count : number
+ * @returns {*}
+ */
+function html(makeShop, count) {
+  return makeShop
+    .map((shop) => {
+      return createCard(
+        shop.title,
+        shop.price,
+        shop.description,
+        shop.img,
+        shop.buy,
+        shop.id,
+        count >= shop.price ? "buy" : "no-buy",
+      );
+    })
+    .join("");
 }

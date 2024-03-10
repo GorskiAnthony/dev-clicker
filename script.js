@@ -7,8 +7,9 @@ const deleteAccount = document.getElementById("deleteAccount");
 let shopItems = document.querySelector(".shop-items");
 
 deleteAccount.addEventListener("click", () => {
-  localStorage.clear();
-  location.reload();
+  if (confirm("Voulez vous supprimer votre compte ?")) {
+    confirmDeleteAccount();
+  }
 });
 
 // Get the countClick from the localStorage
@@ -84,27 +85,12 @@ imgDev.addEventListener("click", () => {
   }, 1000);
 
   // Increment the countClick
-  countClick = localStorage.getItem("countClick");
-  countClick++;
-  // Update the localStorage
-  localStorage.setItem("countClick", countClick);
+  countClick = updateCount();
   // Update the bugCount
   bugCount.textContent = countClick;
 
   // check is possible to buy the items
-  shopItems.innerHTML = shops
-    .map((shop) => {
-      return createCard(
-        shop.title,
-        shop.price,
-        shop.description,
-        shop.img,
-        shop.buy,
-        shop.id,
-        countClick >= shop.price ? "buy" : "no-buy",
-      );
-    })
-    .join("");
+  shopItems.innerHTML = html(shops, countClick);
 });
 
 // Toggle the active class on the nav-links
@@ -124,20 +110,7 @@ links.forEach((link) => {
 });
 
 // Create the shop items
-
-shopItems.innerHTML = shops
-  .map((shop) => {
-    return createCard(
-      shop.title,
-      shop.price,
-      shop.description,
-      shop.img,
-      shop.buy,
-      shop.id,
-      countClick >= shop.price ? "" : "no-buy",
-    );
-  })
-  .join("");
+shopItems.innerHTML = html(shops, countClick);
 
 // Add the event listener on item in the shop items
 shopItems.addEventListener("click", (e) => {
@@ -151,10 +124,10 @@ shopItems.addEventListener("click", (e) => {
       if (shop.id === shopSelected.id) {
         if (countClick >= shop.price) {
           countClick -= shop.price;
+          shop.buy++;
+          shop.price = Math.floor(shop.price * 1.7);
           localStorage.setItem("countClick", countClick);
           bugCount.textContent = countClick;
-          shop.buy++;
-          shop.price = Math.floor(shop.price * 1.2);
           localStorage.setItem("shop", JSON.stringify(shops));
         } else {
           console.warn("You don't have enough bugs");
@@ -173,12 +146,11 @@ shopItems.addEventListener("click", (e) => {
     .join("");
 });
 
-// run shop !
-// congrat
-
-if (shops[0].buy > 0) {
-  setInterval(() => {
-    const countBugs = localStorage.getItem("countClick");
-    bugCount.textContent = congrat(shops[0].buy, countBugs);
-  }, 10000);
-}
+// congrats
+setInterval(() => {
+  if (shops[0].buy > 0) {
+    countClick = updateCount(shops[0].buy);
+    bugCount.textContent = countClick;
+  }
+  shopItems.innerHTML = html(shops, countClick);
+}, 2000);
