@@ -78,3 +78,12 @@ function html(makeShop, count) {
     })
     .join("");
 }
+function handleNavLinkClick(e) {
+  if (e.target.tagName === "A") {
+    navLinks
+      .querySelectorAll("a")
+      .forEach((link) => link.classList.remove("active"));
+    e.target.classList.add("active");
+    navLinks.classList.remove("active");
+  }
+}
