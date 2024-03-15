@@ -42,14 +42,14 @@ function writeCode(x, y) {
 
   // style the img
   img.style.transform = 'translate(-50%, -50%)';
-  img.style.left = x - 50 + 'px';
-  img.style.top =  y - 275 + 'px';
+  img.style.top = `${Math.random() * 250}px`;
+  img.style.left = `${Math.random() * 100}%`;
 
   // animation
   img.animate(
     {
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 50}%`,
+      left: `${Math.random() * 50}%`,
     },
     10000,
     );
