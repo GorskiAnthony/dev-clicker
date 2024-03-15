@@ -15,7 +15,7 @@ function createCard(title, price, description, img, buy, id, isBuy) {
     <div class="shop-info">
       <div>
         <h3 class="title">${title}</h3>
-        <p><span class="bold">Price:</span>${price} bugs</p>
+        <p><span class="bold">Price:</span>${price} lines</p>
       </div>
       <p>${buy}</p>
     </div>
@@ -31,18 +31,19 @@ function createCard(title, price, description, img, buy, id, isBuy) {
  * Create a bug img
  * @returns {HTMLImageElement}
  */
-function bug() {
+function writeCode(x, y) {
+
+  console.log(x, y);
   // create img element
   const img = document.createElement("img");
   // add the bug img and the bug class
-  img.src = "./assets/bug.png";
+  img.src = "./assets/write.png";
   img.classList.add("bug");
 
   // style the img
-  img.style.transform = "translate(-50%, -50%)";
-  img.style.top = `${Math.random() * 100}px`;
-  img.style.left = `${Math.random() * 100}%`;
-  img.style.rotate = `${Math.random() * 360}deg`;
+  img.style.transform = 'translate(-50%, -50%)';
+  img.style.left = x - 50 + 'px';
+  img.style.top =  y - 275 + 'px';
 
   // animation
   img.animate(
@@ -51,7 +52,7 @@ function bug() {
       left: `${Math.random() * 100}%`,
     },
     10000,
-  );
+    );
 
   // return the img
   return img;

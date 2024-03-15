@@ -12,18 +12,19 @@ function handleDeleteAccount() {
 }
 
 function animateImgDev(img) {
-  img.style.transform = "scale(0.95)";
+  img.style.transform = "scale(0.90)";
   setTimeout(() => {
     img.style.transform = "scale(1)";
   }, 100);
 }
 
-function addAndRemoveBug(container) {
-  const img = bug(); // Function `bug` not provided
+function addAndRemoveBug(container, x, y) {
+  console.log(x, y)
+  const img = writeCode(x, y); // Function `bug` not provided
   container.appendChild(img);
   setTimeout(() => {
     img.remove();
-  }, 1000);
+  }, 500);
 }
 
 function createShopItems(shopItems, shops, count) {

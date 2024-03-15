@@ -15,7 +15,7 @@ const dataShop = [
     title: "Congrats",
     price: "10",
     description:
-      "Les encouragements sont la clé du succès, c'est pour ça que plus tu achètes plus tu kill de bugs",
+      "Les encouragements sont la clé du succès, c'est pour ça que plus tu achètes plus d'encouragements",
     img: "congrat",
     buy: 0,
   },
@@ -67,15 +67,16 @@ function init() {
 
 function setupEventListeners() {
   deleteAccount.addEventListener("click", handleDeleteAccount);
-  imgDev.addEventListener("click", handleImgDevClick);
+  imgDev.addEventListener("click", (e) => handleImgDevClick(e));
   burger.addEventListener("click", () => navLinks.classList.toggle("active"));
   navLinks.addEventListener("click", handleNavLinkClick);
   shopItems.addEventListener("click", handleShopItemClick);
 }
 
-function handleImgDevClick() {
+function handleImgDevClick(e) {
+
   animateImgDev(imgDev);
-  addAndRemoveBug(containerImg);
+  addAndRemoveBug(containerImg, e.clientX, e.clientY);
   updateCount(1, bugCount);
   countClick = +localStorage.getItem("countClick");
   createShopItems(shopItems, shops, countClick);
